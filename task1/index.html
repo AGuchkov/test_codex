@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>test_codex</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <div class="header__burger">
+                <button class="btn-menu" type="button">
+                    <span class="btn-menu__text">Меню</span>
+                    <span class="btn-menu__box">
+                        <span class="btn-menu__inner"></span>
+                    </span>
+                </button>
+            </div>
+            <nav class="header__nav">
+                <ul class="header__ul">
+                    <li class="header__li">
+                        <a data-goto=".q1" href="#" class="header__link">Undefined vs null</a>
+                    </li>
+                    <li class="header__li">
+                        <a data-goto=".q2" href="#" class="header__link">Error x</a>
+                    </li>
+                    <li class="header__li">
+                        <a data-goto=".q3" href="#" class="header__link">Am I an array?</a>
+                    </li>
+                    <li class="header__li">
+                        <a data-goto=".q4" href="#" class="header__link">Am I a square?</a>
+                    </li>
+                    <li class="header__li">
+                        <a data-goto=".q5" href="#" class="header__link">To be a palindrome or not to be</a>
+                    </li>
+                    <li class="header__li">
+                        <a data-goto=".q6" href="#" class="header__link">Fibonacci stuff</a>
+                    </li>
+                    <li class="header__li">
+                        <a data-goto=".q7" href="#" class="header__link">Are you thinking what I'm thinking?</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="main">
+        <div class="container">
+            <div class="col-12 card q1">
+                <h2 class="card__title">1. В чем разница между null и undefined?</h2>
+                <div class="card__text">
+                    <p><strong>Undefined</strong> («неопределенный») представляет собой значение по умолчанию:</p>
+                    <ul>
+                        <li>переменной, которой не было присвоено значения, т.е. объявленной, но не инициализированной
+                            переменной;</li>
+                        <li>функции, которая ничего не возвращает явно, например, console.log(a);</li>
+                        <li>несуществующего свойства объекта.</li>
+                    </ul>
+                    <pre>
+let <span class="var">a</span>
+const <span class="fun">doNothing</span> <span class="mark">=</span> () <span class="mark">=></span> {} 
+const <span class="var">someObj</span> <span class="mark">=</span> { 
+    <span class="var">a</span><span class="mark">:</span> <span class="fun">1</span><span class="mark">,</span>
+    <span class="var">b</span><span class="mark">:</span> <span class="quote">'abc'</span><span class="mark">,</span>
+    <span class="var">c</span><span class="mark">:</span> false 
+} 
+
+<span class="var">console</span><span class="mark">.</span><span class="fun">log</span>(<span class="var">a</span>) <span class="com">// undefined</span> 
+<span class="var">console</span><span class="mark">.</span><span class="fun">log</span>(<span class="fun">doNothing</span><span class="in-fun">()</span>) <span class="com">// undefined</span> 
+<span class="var">console</span><span class="mark">.</span><span class="fun">log</span>(<span class="var">someObj</span><span class="in-fun">[</span><span class="quote">'d'</span><span class="in-fun">]</span>) <span class="com">// undefined</span>
+</pre>
+                    <p><strong>Null</strong> — это «значение отсутствия значения». <strong>Null</strong> — это значение,
+                        которое
+                        присваивается переменной
+                        явно.</p>
+                    <pre>
+let <span class="var">b</span> <span class="mark">=</span> <span class="quote">'null'</span>
+
+<span class="var">console</span><span class="mark">.</span><span class="fun">log</span>(<span class="var">b</span>) <span class="com">// null</span>
+</pre>
+                </div>
+            </div>
+            <div class="col-12 card q2">
+                <h2 class="card__title">2. Почему вывод в консоль obj.someprop.x приводит к ошибке?</h2>
+                <div class="card__text">
+                    <p>Мы пытается получить доступ к свойству x свойства someprop, которое имеет значение undefined.
+                        obj.__proto__.__proto = null, поэтому возвращается undefined, а у undefined нет свойства x.</p>
+                    <pre>
+const <span class="var">obj</span> <span class="mark">=</span> {}
+
+<span class="var">console</span><span class="mark">.</span><span class="fun">log</span>(<span class="var">obj</span><span class="mark">.</span><span class="fun">someprop</span><span class="mark">.</span><span class="fun">x</span>) <span class="com">// Uncaught TypeError</span>
+</pre>
+                </div>
+            </div>
+            <div class="col-12 card q3">
+                <h2 class="card__title">3. Как проверить, является ли значение массивом?</h2>
+                <div class="card__text">
+                    <p>Используем метод <strong>Array.isArray()</strong> возвращает <strong>true</strong>, если объект
+                        является массивом и <strong>false</strong>, если он массивом не является.</p>
+                    <pre>
+<span class="com">// Все следующие вызовы вернут true</span>
+
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="in-fun">[]</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="in-fun">[<span class="var">1</span>]</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="quote">new</span> <span class="var">Array</span><span class="in-fun">()</span>)
+
+<span class="com">// Малоизвестный факт: Array.prototype сам является массивом:</span>
+
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="var">Array</span><span class="mark">.</span><span class="fun">prototype</span>)
+
+<span class="com">// Все следующие вызовы вернут false</span>
+
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>()
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="in-fun">{}</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="var">null</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="var">undefined</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="var">17</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="quote">"Array"</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="var">true</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="var">false</span>)
+<span class="var">Array</span><span class="mark">.</span><span class="fun">isArray</span>(<span class="in-fun">{ <span class="fun">__proto__</span><span class="mark">:</span><span class="var">Array</span><span class="mark">.</span><span class="fun">prototype</span> }</span>) 
+</pre>
+                </div>
+            </div>
+            <div class="col-12 card q4">
+                <h2 class="card__title">4. Проверить, является ли целое число квадратом, не используя математические
+                    функции.
+                </h2>
+                <div class="card__text">
+                    <p>Для этого напишем функцию в основе которой простой цикл <strong>for</strong>. В цикле проходимся
+                        по
+                        всем
+                        числам от <strong>0</strong> до <strong>n</strong>. Далее идет проверка: если какое-то из
+                        перечисленных чисел при умножении само на
+                        себя дает <strong>n</strong>, значит <strong>n</strong> является квадратом числа
+                        <strong>i</strong>
+                        и возвращаем <strong>true</strong>. Во всех остальных случаях
+                        возвращаем <strong>false</strong>. Также следует указать краевое условие для чисел
+                        <strong>0</strong> и <strong>1</strong>, чтобы код работал
+                        корректно. В таком формате идет охват уже всех чисел от <strong>0</strong> до
+                        <strong>n</strong>.
+                    </p>
+                    <pre>
+let <span class="var">isSquare</span> <span class="mark">=</span> <span class="fun">function</span>(<span class="var">n</span>) {
+
+    <span class="fun">if</span>(<span class="var">n</span> <span class="mark">===</span> <span class="var">0</span> <span class="mark">||</span> <span class="var">n</span> <span class="mark">===</span> <span class="var">1</span>) {
+        <span class="fun">return</span> <span class="quote">true</span>
+    }
+
+    <span class="fun">for</span> (let <span class="var">i</span> <span class="mark">=</span> <span class="var">0</span><span class="mark">;</span> <span class="var">i</span> <span class="mark">&#60</span> <span class="var">n</span><span class="mark">;</span> <span class="var">i</span><span class="mark">++)</span> {
+        <span class="fun">if</span>(<span class="var">i</span> <span class="mark">*</span> <span class="var">i</span> <span class="mark">===</span> <span class="var">n</span>) {
+            <span class="fun">return</span> <span class="quote">true</span>
+        }
+    }
+
+    <span class="fun">return</span> <span class="quote">false</span>
+}
+    </pre>
+                </div>
+            </div>
+            <div class="col-12 card q5">
+                <h2 class="card__title">5. Написать функцию, которая принимает в качестве аргумента строку и возвращает
+                    значение true, если строка является палиндромом, и false, если это не так.
+                </h2>
+                <div class="card__text">
+                    <p>Для этого напишем следующую функцию. Предварительно приведем к
+                        общему регистру (метод <strong>toLowerCase</strong> или <strong>toUpperCase</strong>) и уберем
+                        все
+                        пробелы при помощи метода <strong>replace</strong> и регулярного выражения. Далее сравниваем
+                        значение <strong>str</strong> с этимже значением, только в отзеркаленном виде. Зеркалим при
+                        помощи
+                        методов: <strong>split</strong> (преобразуем строку в массив посимвольно),
+                        <strong>reverce</strong>
+                        (меняем порядок следования массива) и <strong>join</strong> (преобразуем полученный массив
+                        обратно в
+                        строку). Если строка является палиндромом, получаем <strong>true</strong>, иначе
+                        <strong>false</strong>.
+                    </p>
+                    <pre>
+<span class="fun">palindrome</span>(<span class="quote">'racecar'</span>) <span class="com">// true</span>
+<span class="fun">palindrome</span>(<span class="quote">'table'</span>) <span class="com">// false</span>
+<span class="fun">palindrome</span>(<span class="quote">'Anna'</span>) <span class="com">// true</span>
+
+<span class="fun">function</span> <span class="var">palindrome</span>(<span class="var">str</span>) {
+    <span class="var">str</span> <span class="mark">=</span> <span class="var">str</span><span class="mark">.</span><span class="fun">toLowerCase</span>()<span class="mark">.</span><span class="fun">replace</span>(<span class="var">/\s/g</span><span class="mark">,</span><span class="quote">''</span>)
+    <span class="fun">return</span> <span class="var">str</span> <span class="mark">===</span> <span class="var">str</span><span class="mark">.</span><span class="fun">split</span>(<span class="quote">''</span>)<span class="mark">.</span><span class="fun">reverse</span>()<span class="mark">.</span><span class="fun">join</span>(<span class="quote">''</span>)
+}
+    </pre>
+                    <p>Если строка длинная, то можно решить задачу через цикл <strong>for</strong>. Для этого делим
+                        длину
+                        строки пополам, чтобы не сравнивать повторно символы по которым уже прошлись. Далее проверяем
+                        равен
+                        ли первый символ последнему и т.д. до середины. Если несоответвий нет, значит строка является
+                        палиндромом <strong>true</strong>, иначе <strong>false</strong>
+                    </p>
+                    <pre>
+<span class="fun">palindrome2</span>(<span class="quote">'А роза упала на лапу Азора'</span>) <span class="com">// true</span>
+
+<span class="fun">function</span> <span class="var">palindrome2</span>(<span class="var">str</span>) {
+    <span class="var">str</span> <span class="mark">=</span> <span class="var">str</span><span class="mark">.</span><span class="fun">toLowerCase</span>()<span class="mark">.</span><span class="fun">replace</span>(<span class="var">/\s/g</span><span class="mark">,</span><span class="quote">''</span>)
+    const <span class="var">len</span> <span class="mark">=</span> <span class="var">Math</span><span class="mark">.</span><span class="fun">floor</span>(<span class="var">str</span><span class="mark">.</span><span class="fun">length</span> <span class="mark">/</span> <span class="var">2</span>)
+
+    <span class="fun">for</span>(let <span class="var">i</span> <span class="mark">=</span> <span class="var">0</span><span class="mark">;</span> <span class="var">i</span> <span class="mark">&#60</span> <span class="var">len</span><span class="mark">;</span> <span class="var">i</span><span class="mark">++</span>) {
+        <span class="fun">if</span>(<span class="var">str</span><span class="in-fun">[</span><span class="var">i</span><span class="in-fun">]</span> <span class="mark">!==</span> <span class="var">str</span><span class="in-fun">[</span><span class="var">str</span><span class="mark">.</span><span class="fun">length</span> <span class="mark">-</span> <span class="var">i</span> <span class="mark">-</span> <span class="var">1</span><span class="in-fun">]</span>) {
+            <span class="fun">return</span> <span class="quote">false</span>
+        }
+        <span class="fun">return</span> <span class="quote">true</span>
+    }
+}
+    </pre>
+                </div>
+            </div>
+            <div class="col-12 card q6">
+                <h2 class="card__title">6. Напишите функцию, которая возвращает n-ую запись в последовательности
+                    Фибоначчи,
+                    где n — это число, которое вы передаёте в качестве аргумента функции.
+                </h2>
+                <div class="card__text">
+                    <p>Здесь также есть два решения. В первом мы сохраняем все числа в массив <strong>result</strong>.
+                        Далее
+                        в цикле <strong>for</strong> итерируемся с 2. Определяем предыдущее и предпредыдущее значение
+                        переменной, а их сумму пушим (<strong>push</strong>) в массив. Когда мы дошли по значения
+                        заддыным
+                        аргументов <strong>num</strong> - выводим результат.
+                    </p>
+                    <pre>
+<span class="fun">function</span> <span class="var">fibonacci</span>(<span class="var">num</span>) {
+
+    const <span class="var">result</span> <span class="mark">=</span> <span class="in-fun">[ <span class="var">0<span class="mark">,</span> 1</span> ]</span>
+
+    <span class="fun">for</span> (let <span class="var">i</span> <span class="mark">=</span> <span class="var">2</span><span class="mark">;</span> <span class="var">i</span> <span class="mark">&#60=</span> <span class="var">num</span><span class="mark">;</span> <span class="var">i</span><span class="mark">++</span>) {
+        const <span class="var">prevNum1</span> <span class="mark">=</span> <span class="var">result</span><span class="in-fun">[<span class="var">i <span class="mark">-</span> 1</span>]</span>
+        const <span class="var">prevNum2</span> <span class="mark">=</span> <span class="var">result</span><span class="in-fun">[<span class="var">i <span class="mark">-</span> 2</span>]</span>
+
+        <span class="var">result</span><span class="mark">.</span><span class="fun">push</span>(<span class="var">prevNum1 <span class="mark">+</span> prevNum2</span>)
+    }
+
+    <span class="fun">return</span> <span class="var">result</span><span class="in-fun">[<span class="var">num</span>]</span>
+}
+    </pre>
+                    <p>Во втором работаем только с последними двумя числами. Создадим две переменные <strong>a</strong>
+                        и
+                        <strong>b</strong>. В этих переменных будем хранить предыдущее и предпредыдущее значение
+                        Фибоначчи.
+                        В цикле <strong>for</strong> итератор ставим на 3 позицию, т.к. первые 2 числа изветны. Далее
+                        переопределяем значение переменных ( <strong>a</strong> присваеваем значение <strong>b</strong>,
+                        а
+                        <strong>b</strong> присваеваем сумму значений <strong>a + b</strong> )
+                    </p>
+                    <pre>
+<span class="fun">function</span> <span class="var">fibonacci2</span>(<span class="var">num</span>) {
+
+    let <span class="var">a <span class="mark">=</span> 1</span>
+        <span class="var">b <span class="mark">=</span> 1</span>
+
+    <span class="fun">for</span> (let <span class="var">i</span> <span class="mark">=</span> <span class="var">3</span><span class="mark">;</span> <span class="var">i</span> <span class="mark">&#60=</span> <span class="var">num</span><span class="mark">;</span> <span class="var">i</span><span class="mark">++</span>) {
+        <span class="in-fun">[ <span class="var">a<span class="mark">,</span> b</span> ] <span class="mark">=</span> [ <span class="var">b<span class="mark">,</span> a <span class="mark">+</span> b</span> ]</span>
+    }
+
+    <span class="fun">return</span> <span class="var">b</span>
+}
+    </pre>
+                </div>
+            </div>
+            <div class="col-12 card q7">
+                <h2 class="card__title">7. Попробуйте проанализировать, что делает следующий код.
+                </h2>
+                <div class="card__text">
+                    <pre>
+const <span class="var">nums</span> <span class="mark">=</span> <span class="in-fun">[<span class="var">0<span class="mark">,</span> 39<span class="mark">,</span> 28<span class="mark">,</span> 34<span class="mark">,</span> 1<span class="mark">,</span> 3<span class="mark">,</span> 6<span class="mark">,</span> 8<span class="mark">,</span> 4<span class="mark">,</span> 72<span class="mark">,</span> 7</span>]</span>
+
+<span class="var">nums</span><span class="mark">.</span><span class="fun">forEach</span>(<span class="var">num</span> <span class="mark">=></span> {
+    <span class="fun">setTimeout</span>(<span class="var">()</span> <span class="mark">=></span> <span class="var">console</span><span class="mark">.</span><span class="fun">log</span><span class="in-fun">(<span class="var">num</span>)</span><span class="mark">,</span> <span class="var">num</span>)
+})
+</pre>
+                    <p>Идет перебор массива <strong>nums</strong> и вывод значений в консоль с задержкой равной
+                        выводимому
+                        значению. Получается своего рода сортировка элементов массива в порядке возрастания.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>Copyright: copy+c, copy+v</p>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
